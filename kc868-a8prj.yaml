@@ -15,12 +15,6 @@ esp32:
 web_server:
   port: 80
 
-dashboard_import:
-  package_import_url: github://hzkincony/kc868-a8/kc868-a8.yaml@main
-
-ota:
-  password: ""
-
 # Example configuration entry for ESP32
 i2c:
   sda: 4
@@ -28,14 +22,9 @@ i2c:
   scan: true
   id: bus_a
 
-# Example configuration entry
-ethernet:
-  type: LAN8720
-  mdc_pin: GPIO23
-  mdio_pin: GPIO18
-  clk_mode: GPIO17_OUT
-  phy_addr: 0
-
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
 # Example configuration entry
 pcf8574:
   - id: "pcf8574_hub_out_1" # for output channel 1-8
@@ -174,7 +163,15 @@ binary_sensor:
       number: 7
       mode: INPUT
       inverted: true
-
+sensor: 
+  - platforma: dht
+    pin: 14
+    teplota:
+      název: "Teplota velký sal"
+    vlhkost:
+      název: "vlhkost velky sal"
+     update_interval: 60s
+    
 # Enable logging
 logger:
 
